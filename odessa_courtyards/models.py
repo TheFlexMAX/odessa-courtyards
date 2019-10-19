@@ -60,7 +60,7 @@ class ProblemArea(models.Model):
     photo = models.ImageField()
 
 
-
+'''
 class FormAfter(models.Model):
     # Связь с участником
     member = models.ForeignKey(Member,
@@ -79,3 +79,5 @@ class ReformedAreas(models.Model):
                                    on_delete=models.CASCADE)
     # Сама фотография исправленного участка
     photo = models.ImageField()
+
+'''

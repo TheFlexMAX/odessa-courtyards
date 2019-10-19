@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'odessa_courtyards.apps.OdessaCourtyardsConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
