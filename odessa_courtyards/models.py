@@ -60,22 +60,22 @@ class ProblemArea(models.Model):
     photo = models.ImageField()
 
 
-# TODO: Сделать эту форму когда появятся пользователи
-'''
+
 class FormAfter(models.Model):
     # Связь с участником
-'''
+    member = models.ForeignKey(Member,
+                               null=False,
+                               on_delete=models.CASCADE)
+    # Общая фотка
+    general_view = models.ImageField()
 
 
 # Модель формы "После" которая хранит фотки решенных участков
 class ReformedAreas(models.Model):
     # (Связь) ссылка на то, к какой формы привязана фотка решенного участка
-    #TODO: Сделать после добавления пользователя
-    '''
-    form_after = models.ForeignKey(form_after,
-                                   null=False,
+    form_after = models.ForeignKey(FormAfter,
+                                   null=True,
                                    related_name='reformed_photos',
                                    on_delete=models.CASCADE)
-   '''
     # Сама фотография исправленного участка
     photo = models.ImageField()
