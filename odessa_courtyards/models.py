@@ -52,7 +52,10 @@ class FormBefore(models.Model):
 # Модель формы "До" которая хранит фотки проблемных участков
 class ProblemArea(models.Model):
     # (Связь) ссылка на то, к какой формы привязана фотка проблемного участка
-    form_before = models.ForeignKey(form_before, null=False, related_name='problem_photos')
+    form_before = models.ForeignKey(FormBefore,
+                                    null=False,
+                                    related_name='problem_photos',
+                                    on_delete=models.CASCADE)
     # сама фотография проблемного участка
     photo = models.ImageField()
 
@@ -67,6 +70,12 @@ class FormAfter(models.Model):
 # Модель формы "После" которая хранит фотки решенных участков
 class ReformedAreas(models.Model):
     # (Связь) ссылка на то, к какой формы привязана фотка решенного участка
-    form_after = models.ForeignKey(form_after, null=False, related_name='reformed_photos')
+    #TODO: Сделать после добавления пользователя
+    '''
+    form_after = models.ForeignKey(form_after,
+                                   null=False,
+                                   related_name='reformed_photos',
+                                   on_delete=models.CASCADE)
+   '''
     # Сама фотография исправленного участка
     photo = models.ImageField()
