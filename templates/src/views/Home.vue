@@ -3,14 +3,21 @@
     <div :style="{'background':'url('+require('@/assets/images/main.png')+')','background-size':'cover'}" id="mainDiv" class="d-inline-flex align-items-center flex-column justify-content-center">
       <div id="title" class="m-4  text-uppercase">{{title}}</div>
       <div id="text" class="container align-center m-4" >{{text}}</div>
-      <div class="align-items-center m-4"><b-button id="make-request-btn" to="/">Подать заявку</b-button></div>  
+      <div class="align-items-center m-4">
+        <div id="btn-wrapper">
+          <b-button id="make-request-btn" to="/">Подать заявку</b-button>
+        </div>
+      </div>  
     </div>
     <Header />
     <div style="height:10vh" id="yakor-rules"></div>
     <div id="rules" class="container text-center">
       <h1 class="mb-4">Правила</h1>
+      <p class="alert alert-danger">
+        Предупреждение! Перед участием в конкурсе нужно убедиться, что все планы по реконструкции будут одобрены на законодательном уровне, во избежании неприятных ситуаций на этапе реконструкции. 
+      </p>
       <ol>
-        <li v-for="rule in rules" :key="rule.id" class="text-justify">
+        <li v-for="rule in rules" :key="rule.id" class="text-justify mt-4">
           {{rule.text}}
         </li>
       </ol>
