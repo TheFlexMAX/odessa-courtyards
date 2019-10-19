@@ -11,18 +11,26 @@ from .models import (
 # Первая форма (Подача заявления)
 class MemberRequestForm(forms.ModelForm):
     first_name = forms.CharField(label='Имя')
-    second_name = forms.CharField(label='Фамилия')
+    last_name = forms.CharField(label='Фамилия')
     middle_name = forms.CharField(label='Отчество')
     phone_number = forms.CharField(label='Номер телефона', max_length=10)
-    nomination = forms.ModelChoiceField(queryset=MemberRequest.objects.all(),
-                                        label='Номинация',
-                                        empty_label="Выберите номинацию")
+    NOMINATIONS = (
+        ('Старый город', 'Старый город'),
+        ('Многоэтажки', 'Многоэтажки'),
+        ('Самый зеленый двор', 'Самый зеленый двор'),
+        ('Самый спортивный', 'Самый спортивный'),
+        ('Лучший двор для детей', 'Лучший двор для детей'),
+        ('Лучший стрит-арт', 'Лучший стрит-арт'),
+        ('Лучший подъезд', 'Лучший подъезд')
+    )
+    nomination = forms.ChoiceField(choices=NOMINATIONS,
+                                        label='Номинация')
     adress = forms.CharField(label='Адрес')
     additional_information = forms.Textarea()
 
     class Meta:
         model = MemberRequest
-        fields = ['first_name', 'second_name', 'middle_name', 'phone_number', 'nomination', 'adress', 'additional_information']
+        fields = ['first_name', 'last_name', 'middle_name', 'phone_number', 'nomination', 'adress', 'additional_information']
 
 
 # Вторая форма "До"

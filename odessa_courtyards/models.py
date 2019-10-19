@@ -19,10 +19,10 @@ class Member(models.Model):
         return self.get_full_name()
 
     def get_full_name(self):
-        return self.first_name + ' ' + self.second_name + ' ' + self.middle_name
+        return self.first_name + ' ' + self.last_name + ' ' + self.middle_name
 
     def get_short_name(self):
-        return self.first_name + ' ' + self.second_name
+        return self.first_name + ' ' + self.last_name
 
 
 # жюри
@@ -37,10 +37,10 @@ class Jury(models.Model):
         return self.get_full_name()
 
     def get_full_name(self):
-        return self.first_name + ' ' + self.second_name + ' ' + self.middle_name
+        return self.first_name + ' ' + self.last_name + ' ' + self.middle_name
 
     def get_short_name(self):
-        return self.first_name + ' ' + self.second_name
+        return self.first_name + ' ' + self.last_name
 
 
 # Заявка участника

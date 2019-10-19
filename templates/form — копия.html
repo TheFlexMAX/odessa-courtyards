@@ -12,10 +12,10 @@
         Контактный телефон: <input type="text" name="phone_number"><br>
         email: <input type="email" name="email"><br>
         Номинации:
-        {% block content %}
-            {{ form.nomination }}
-        {% endblock %}
-        <br>
+        <select name="nomination">
+            <option value="Старый город">Опция 1</option>
+            <option value="Многоэтажки">Опция 2</option>
+        </select><br>
         адрес <input type="text" name="adress"><br>
         доп инфа <textarea name="additional_information" cols="30" rows="10"></textarea><br>
         <input type="submit">
