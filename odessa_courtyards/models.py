@@ -71,6 +71,10 @@ class MemberRequest(models.Model):
 
 # Модели формы которую заполняет пользователь "До"
 class FormBefore(models.Model):
+    # Привязка к юзеру
+    member = models.ForeignKey(Member,
+                               on_delete=models.CASCADE,
+                               null=True)
     # Описание планов
     plan_description = models.TextField(max_length=2000)
     # Описание проблем
@@ -103,8 +107,10 @@ class ProblemArea(models.Model):
 class FormAfter(models.Model):
     # Связь с участником
     member = models.ForeignKey(Member,
-                               null=False,
-                               on_delete=models.CASCADE)
+                               null=True,
+                               on_delete=models.CASCADE,)
+    # Описание продленных работ
+    done_work_description = models.TextField(max_length=2000, null=True)
     # Общая фотка
     general_view = models.ImageField()
 
