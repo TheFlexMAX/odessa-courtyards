@@ -2,14 +2,45 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import UserManager
 from django.contrib.auth.base_user import AbstractBaseUser
+from django.utils import timezone
+
 
 # участник
+class Member(models.Model):
+    first_name = models.CharField(max_length=30, null=False)
+    last_name = models.CharField(max_length=30, null=False)
+    middle_name = models.CharField(max_length=30, null=False)
+    phone_number = models.CharField(max_length=10, null=False)
+    email = models.CharField(max_length=50, null=False)
+    password = models.CharField(max_length=30)
+    registration_date = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return self.get_full_name()
+
+    def get_full_name(self):
+        return self.first_name + ' ' + self.second_name + ' ' + self.middle_name
+
+    def get_short_name(self):
+        return self.first_name + ' ' + self.second_name
 
 
 # жюри
+class Jury(models.Model):
+    username = models.CharField(max_length=30, null=False)
+    password = models.CharField(max_length=30)
+    first_name = models.CharField(max_length=30, null=False)
+    last_name = models.CharField(max_length=30, null=False)
+    middle_name = models.CharField(max_length=30, null=False)
 
+    def __str__(self):
+        return self.get_full_name()
 
-# модератор
+    def get_full_name(self):
+        return self.first_name + ' ' + self.second_name + ' ' + self.middle_name
+
+    def get_short_name(self):
+        return self.first_name + ' ' + self.second_name
 
 
 # Заявка участника
@@ -34,6 +65,9 @@ class MemberRequest(models.Model):
     adress = models.CharField(max_length=100, null=False)
     additional_information = models.TextField(max_length=300, null=True)
 
+    def __str__(self):
+        return self.adress + ' ' + self.nomination
+
 
 # Модели формы которую заполняет пользователь "До"
 class FormBefore(models.Model):
@@ -47,6 +81,8 @@ class FormBefore(models.Model):
     conceptual_design = models.FileField()
     # одобренная не одобренная форма
 
+    def __str__(self):
+        return self.adress + ' ' + self.nomination
 
 
 # Модель формы "До" которая хранит фотки проблемных участков
@@ -59,8 +95,11 @@ class ProblemArea(models.Model):
     # сама фотография проблемного участка
     photo = models.ImageField()
 
+    def __str__(self):
+        return self.form_before
 
-'''
+
+# Модели формы которую заполняет пользователь "После"
 class FormAfter(models.Model):
     # Связь с участником
     member = models.ForeignKey(Member,
@@ -68,6 +107,9 @@ class FormAfter(models.Model):
                                on_delete=models.CASCADE)
     # Общая фотка
     general_view = models.ImageField()
+
+    def __str__(self):
+        return self.member
 
 
 # Модель формы "После" которая хранит фотки решенных участков
@@ -80,4 +122,25 @@ class ReformedAreas(models.Model):
     # Сама фотография исправленного участка
     photo = models.ImageField()
 
-'''
+    def __str__(self):
+        return self.form_after
+
+
+# Оставленные оценки
+class Mark(models.Model):
+    # Генерирует возможные оценки для выбора
+    MARKS_LIST = (
+        tuple([mark for mark in range(100)])
+    )
+    # Ссылка на форму "После"
+    form_after = models.ForeignKey(FormAfter,
+                                   related_name='appraised_yards',
+                                   on_delete=models.CASCADE)
+    # Ссылка на того, кто оставил
+    jury = models.ForeignKey(Jury,
+                             on_delete=models.CASCADE)
+    # зафиксированная оценка
+    value = models.IntegerField(null=False, default=0)
+
+    def __str__(self):
+        return self.jury
