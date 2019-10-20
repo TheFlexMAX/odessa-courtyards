@@ -113,7 +113,7 @@ export default {
             let nomId = this.formData.nomination
             this.formData.nomination = Object.entries(this.categoryOptions)[0][1].text
             e.preventDefault()
-            axios.post('/localhost:8000/form', {
+            axios.post('http://localhost:8000/form', {
                 ...formData
             })
             .then(function (response) {
