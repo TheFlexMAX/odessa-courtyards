@@ -31,7 +31,6 @@ class FormAfterViewSet(viewsets.ModelViewSet):
     serializer_class = FormAfterSerializer
     queryset = FormAfter.objects.all()
 
-
 '''
     Классы обработки запросов без view
 '''
@@ -40,6 +39,9 @@ class FormAfterViewSet(viewsets.ModelViewSet):
 class MemberRequestCreate(APIView):
     def post(self, request):
         serializer_class = MemberRequestSerializer(data=request.data)
+        print(f"serializer_class.is_valid(): {serializer_class.is_valid()}")
+        print(f"request.data: {request.data}")
+        print(f"serializer_class.errors: {serializer_class.errors}")
         if serializer_class.is_valid():
             serializer_class.save()
             return Response(serializer_class.data, status=status.HTTP_201_CREATED)
@@ -50,6 +52,9 @@ class MemberRequestCreate(APIView):
 class FormBeforeCreate(APIView):
     def post(self, request):
         serializer_class = FormBeforeSerializer(data=request.data)
+        print(f"serializer_class.is_valid(): {serializer_class.is_valid()}")
+        print(f"request.data: {request.data}")
+        print(f"serializer_class.errors: {serializer_class.errors}")
         if serializer_class.is_valid():
             serializer_class.save()
             return Response(serializer_class.data, status=status.HTTP_201_CREATED)
@@ -57,14 +62,13 @@ class FormBeforeCreate(APIView):
 
 
 # Логика обработки формы "После"
-class FormAfterCreate(View):
-    def get(self, request):
-        form = FormAfterForm()
-        return render(request, 'form.html', context={'form': form})
-
+class FormAfterCreate(APIView):
     def post(self, request):
-        bound_form = FormAfterForm(request.POST)
-        if bound_form.is_valid():
-            new_member_request = bound_form.save()
-            return redirect('../')
-        return render(request, 'form.html', context={'form': bound_form})
+        serializer_class = FormAfterSerializer(data=request.data)
+        print(f"serializer_class.is_valid(): {serializer_class.is_valid()}")
+        print(f"request.data: {request.data}")
+        print(f"serializer_class.errors: {serializer_class.errors}")
+        if serializer_class.is_valid():
+            serializer_class.save()
+            return Response(serializer_class.data, status=status.HTTP_201_CREATED)
+        return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)

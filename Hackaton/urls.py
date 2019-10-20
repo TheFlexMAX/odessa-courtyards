@@ -11,5 +11,5 @@ urlpatterns = [
     # временная маршрутизация
     path('member-request', MemberRequestCreate.as_view()),
     path('form-before', FormBeforeCreate.as_view()),
-    path('FormAfterCreate', FormAfterCreate.as_view())
+    path('form-after-create', FormAfterCreate.as_view())
 ]

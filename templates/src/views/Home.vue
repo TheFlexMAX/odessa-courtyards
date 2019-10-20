@@ -27,7 +27,7 @@
       <h1 class="text-center">Номинации</h1>
       <div class="row">
         <div v-for="nomination in nominations" :key="nomination.id" class="col-4">
-        <Nomination :name="nomination.text" :image="nomination.image"/> 
+        <Nomination :name="nomination.text" :image="nomination.image" :id="nomination.id" />
       </div>
     </div>
     </div>

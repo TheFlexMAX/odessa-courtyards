@@ -10,7 +10,7 @@ class Member(models.Model):
     first_name = models.CharField(max_length=30, null=False)
     last_name = models.CharField(max_length=30, null=False)
     middle_name = models.CharField(max_length=30, null=False)
-    phone_number = models.CharField(max_length=10, null=False)
+    phone_number = models.CharField(max_length=15, null=False)
     email = models.CharField(max_length=50, null=False)
     password = models.CharField(max_length=30)
     registration_date = models.DateField(default=timezone.now)
@@ -76,17 +76,17 @@ class FormBefore(models.Model):
                                on_delete=models.CASCADE,
                                null=True)
     # Описание планов
-    plan_description = models.TextField(max_length=2000)
+    plan_description = models.TextField(max_length=2000, null=True)
     # Описание проблем
-    problem_description = models.TextField(max_length=500)
+    problem_description = models.TextField(max_length=500, null=True)
     # Общая фотка
-    general_view = models.ImageField()
+    general_view = models.ImageField(null=True)
     # Файл эскизного проекта
-    conceptual_design = models.FileField()
+    conceptual_design = models.ImageField(null=True)
     # одобренная не одобренная форма
 
     def __str__(self):
-        return self.adress + ' ' + self.nomination
+        return self.member.adress
 
 
 # Модель формы "До" которая хранит фотки проблемных участков

@@ -2,7 +2,7 @@
   <div class="nomination p-3 container d-flex flex-column justify-content-center align-items-center">
     <b-img :src="imageSrc" class="nomination-image"/>
     <hr>
-    <span class="text-center">{{ name }}</span>
+    <a :href="'/nominations#y'+id" class="text-center">{{ name }}</a>
   </div>
 </template>
 
@@ -15,7 +15,8 @@ export default {
     },
     props: {
         name: String,
-        image: String
+        image: String,
+        id: Number
     },
     computed:{
         imageSrc(){

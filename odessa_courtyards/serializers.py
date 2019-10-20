@@ -5,7 +5,7 @@ from .models import MemberRequest, FormBefore, FormAfter
 class MemberRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = MemberRequest
-        fields = ('NOMINATIONS', 'first_name', 'last_name', 'middle_name',
+        fields = ('first_name', 'last_name', 'middle_name',
                   'phone_number', 'nomination', 'adress', 'additional_information')
 
 
