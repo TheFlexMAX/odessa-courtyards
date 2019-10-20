@@ -11,7 +11,7 @@
     </div>
     <Header :startId="0" />
     <div style="height:10vh" id="yakor-rules"></div>
-    <div id="rules" class="container text-center">
+    <div id="rules" class="container text-center" v-if="stage=='start'">
       <h1 class="mb-4">Правила</h1>
       <p class="alert alert-danger">
         Предупреждение! Перед участием в конкурсе нужно убедиться, что все планы по реконструкции будут одобрены на законодательном уровне, во избежании неприятных ситуаций на этапе реконструкции. 
@@ -21,6 +21,9 @@
           {{rule.text}}
         </li>
       </ol>
+    </div>
+    <div>
+    <Winners v-if="stage=='finished'" />
     </div>
     <div id="nominations" class="container">
       <div style="height:10vh" id="yakor-nominations"></div>
@@ -47,6 +50,7 @@
 
 import Header from '@/components/Header.vue'
 import Nomination from '@/components/Nomination.vue'
+import Winners from '@/components/Winners'
 
 export default {
   name: 'home',
@@ -67,12 +71,14 @@ export default {
         { id: 4, image:'child.png', text: 'Лучший детский двор' },
         { id: 5, image:'art.png', text: 'Лучший стрит арт' },
         { id: 6, image:'pd.png', text: 'Лучший подьезд' },
-      ]
+      ],
+      stage: 'start',//in-progress, //finished //
     }
   },
   components: {
     Header,
-    Nomination
+    Nomination,
+    Winners
   }
 }
 </script>

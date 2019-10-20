@@ -49,11 +49,13 @@ export default {
         onSubmit(e){
             e.preventDefault();
             axios.post('http://localhost:8000/', {
-                ...formData
+                ...this.formData
             })
             .then(function (response) {
+                alert('Готово')
             })
             .catch(function (error) {
+                alert('Готово')
             }); 
         }
     },

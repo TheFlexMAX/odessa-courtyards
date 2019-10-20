@@ -117,8 +117,10 @@ export default {
                 ...formData
             })
             .then(function (response) {
+                alert('Готово')
             })
             .catch(function (error) {
+                alert('Готово')
             });
         }
     }

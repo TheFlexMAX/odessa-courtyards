@@ -5,6 +5,7 @@ import MakeRequest from './views/MakeRequest.vue'
 import Nominations from './views/Nominations.vue'
 import BeforeForm from './views/BeforeForm.vue'
 import AfterForm from './views/AfterForm.vue'
+import Voting from './views/Voting.vue'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/after-form/:name',
       name: 'after-form',
       component: AfterForm
+    },
+    {
+      path: '/voting',
+      name: 'voting',
+      component: Voting
     }
   ]
 })
