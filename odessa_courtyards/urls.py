@@ -8,5 +8,4 @@ router.register(r'member-request', MemberRequestViewSet, basename='member reques
 router.register(r'from-before', FormBeforeViewSet, basename='from before')
 router.register(r'problem-area', ProblemAreaViewSet, basename='problem area')
 
-
 urlpatterns = router.urls

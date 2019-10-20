@@ -4,12 +4,13 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic import View
 
-from .forms import (
-    MemberRequestForm
-)
+from .forms import (MemberRequestForm,
+                    FormBeforeForm,
+                    FormAfterForm)
 
-from .models import MemberRequest, FormBefore, ProblemArea
-                    #FormAfter, ReformedAreas
+from .models import (MemberRequest,
+                     FormBefore,
+                     ProblemArea)
 from .serializers import MemberRequestSerializer, FormBeforeSerializer, ProblemAreaSerializer
 
 
@@ -40,11 +41,35 @@ class MemberRequestCreate(View):
 
     def post(self, request):
         bound_form = MemberRequestForm(request.POST)
-
-        print(f"bound_form.is_valid(): {bound_form.is_valid()}")
-        print(f"bound_form: {bound_form}")
         if bound_form.is_valid():
             new_member_request = bound_form.save()
             return redirect('../')
         return render(request, 'form.html', context={'form': bound_form})
 
+
+# Логика обработки формы "До"
+class FormBeforeCreate(View):
+    def get(self, request):
+        form = FormBeforeForm()
+        return render(request, 'form.html', context={'form': form})
+
+    def post(self, request):
+        bound_form = FormBeforeForm(request.POST)
+        if bound_form.is_valid():
+            new_member_request = bound_form.save()
+            return redirect('../')
+        return render(request, 'form.html', context={'form': bound_form})
+
+
+# Логика обработки формы "После"
+class FormAfterCreate(View):
+    def get(self, request):
+        form = FormAfterForm()
+        return render(request, 'form.html', context={'form': form})
+
+    def post(self, request):
+        bound_form = FormAfterForm(request.POST)
+        if bound_form.is_valid():
+            new_member_request = bound_form.save()
+            return redirect('../')
+        return render(request, 'form.html', context={'form': bound_form})
