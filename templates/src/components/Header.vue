@@ -13,13 +13,16 @@
 <script>
 export default {
     name: 'header',
+    props:{
+        startId: Number
+    },
     data() {
         return {
             links:[
-                {id:0, url:'#mainDiv', text:'Главная'},
-                {id:1, url:'#yakor-rules', text:'Правила'},
-                {id:2, url:'#yakor-nominations', text:'Номинации'},
-                {id:3, url:'#yakor-about', text:'О нас'}
+                {id:0, url:'/#mainDiv', text:'Главная'},
+                {id:1, url:'/#yakor-rules', text:'Правила'},
+                {id:2, url:'/#yakor-nominations', text:'Номинации'},
+                {id:3, url:'/#yakor-about', text:'О нас'}
             ],
             currentActive:0
         }
@@ -28,6 +31,9 @@ export default {
         changeActive(id){
             this.currentActive = id
         }
+    },
+    mounted(){
+        this.currentActive=parseInt(this.startId)
     }
 }
 </script>

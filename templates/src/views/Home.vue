@@ -5,11 +5,11 @@
       <div id="text" class="container align-center m-4" >{{text}}</div>
       <div class="align-items-center m-4">
         <div id="btn-wrapper">
-          <b-button id="make-request-btn" to="/">Подать заявку</b-button>
+          <b-button id="make-request-btn" to="/make-request">Подать заявку</b-button>
         </div>
       </div>  
     </div>
-    <Header />
+    <Header :startId="0" />
     <div style="height:10vh" id="yakor-rules"></div>
     <div id="rules" class="container text-center">
       <h1 class="mb-4">Правила</h1>
