@@ -3,15 +3,18 @@ from rest_framework import viewsets
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic import View
-
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.response import Response
 from .forms import (MemberRequestForm,
                     FormBeforeForm,
                     FormAfterForm)
-
 from .models import (MemberRequest,
                      FormBefore,
-                     ProblemArea)
-from .serializers import MemberRequestSerializer, FormBeforeSerializer, ProblemAreaSerializer
+                     FormAfter)
+from .serializers import (MemberRequestSerializer,
+                          FormBeforeSerializer,
+                          FormAfterSerializer)
 
 
 class MemberRequestViewSet(viewsets.ModelViewSet):
@@ -24,9 +27,9 @@ class FormBeforeViewSet(viewsets.ModelViewSet):
     queryset = FormBefore.objects.all()
 
 
-class ProblemAreaViewSet(viewsets.ModelViewSet):
-    serializer_class = ProblemAreaSerializer
-    queryset = ProblemArea.objects.all()
+class FormAfterViewSet(viewsets.ModelViewSet):
+    serializer_class = FormAfterSerializer
+    queryset = FormAfter.objects.all()
 
 
 '''
@@ -34,31 +37,23 @@ class ProblemAreaViewSet(viewsets.ModelViewSet):
 '''
 
 # Логика обработки формы создания нового студента из формы
-class MemberRequestCreate(View):
-    def get(self, request):
-        form = MemberRequestForm()
-        return render(request, 'form.html', context={'form': form})
-
+class MemberRequestCreate(APIView):
     def post(self, request):
-        bound_form = MemberRequestForm(request.POST)
-        if bound_form.is_valid():
-            new_member_request = bound_form.save()
-            return redirect('../')
-        return render(request, 'form.html', context={'form': bound_form})
+        serializer_class = MemberRequestSerializer(data=request.data)
+        if serializer_class.is_valid():
+            serializer_class.save()
+            return Response(serializer_class.data, status=status.HTTP_201_CREATED)
+        return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# Логика обработки формы "До"
-class FormBeforeCreate(View):
-    def get(self, request):
-        form = FormBeforeForm()
-        return render(request, 'form.html', context={'form': form})
-
+# Логика обработки второй формы
+class FormBeforeCreate(APIView):
     def post(self, request):
-        bound_form = FormBeforeForm(request.POST)
-        if bound_form.is_valid():
-            new_member_request = bound_form.save()
-            return redirect('../')
-        return render(request, 'form.html', context={'form': bound_form})
+        serializer_class = FormBeforeSerializer(data=request.data)
+        if serializer_class.is_valid():
+            serializer_class.save()
+            return Response(serializer_class.data, status=status.HTTP_201_CREATED)
+        return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # Логика обработки формы "После"

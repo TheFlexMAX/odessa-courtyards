@@ -112,7 +112,7 @@ class FormAfter(models.Model):
     # Описание продленных работ
     done_work_description = models.TextField(max_length=2000, null=True)
     # Общая фотка
-    general_view = models.ImageField()
+    general_view = models.ImageField(null=True)
 
     def __str__(self):
         return self.member

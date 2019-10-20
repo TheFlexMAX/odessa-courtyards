@@ -8,6 +8,7 @@ from .models import (
     Member
 )
 
+
 # Первая форма (Подача заявления)
 class MemberRequestForm(forms.ModelForm):
     first_name = forms.CharField(label='Имя')
@@ -24,7 +25,7 @@ class MemberRequestForm(forms.ModelForm):
         ('Лучший подъезд', 'Лучший подъезд')
     )
     nomination = forms.ChoiceField(choices=NOMINATIONS,
-                                        label='Номинация')
+                                    label='Номинация')
     adress = forms.CharField(label='Адрес')
     additional_information = forms.Textarea()
 
